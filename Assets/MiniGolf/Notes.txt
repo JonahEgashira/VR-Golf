@@ -1,0 +1,12 @@
+Huge Themed Mini Golf Assets Collection
+
+This package consists of various models and prefabs. The prefabs are modular and all fit together seamlessly.
+
+Instructions:
+
+1. Drag the prefab into your scene
+2. Open Edit/Snap Settings
+3. Set the move x, y and z to 1 
+4. With the prefab selected click on Snap All Axes.
+5. To move an object, hold down the “Ctrl” key on a PC to move the prefabs in increments of 1 as per the snap settings.
+
