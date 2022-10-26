@@ -8,10 +8,7 @@ public class HeightController : MonoBehaviour
     public GameObject cameraRig;
     public GameObject putterBottom;
     public GameObject floorLevel;
-    public GameObject golfBall;
-
-    public Vector3 ballSpawnPosition = new Vector3(0.0f, 0.2f, 0.0f);
-
+    
     void Start()
     {
     }
@@ -23,21 +20,11 @@ public class HeightController : MonoBehaviour
         {
             FixHeight();
         }
-
-        if (OVRInput.GetDown(OVRInput.RawButton.B))
-        {
-            GenerateBall();
-        }
     }
 
     void FixHeight()
     {
         float heightDiff = floorLevel.transform.position.y - putterBottom.transform.position.y;
         cameraRig.transform.position += Vector3.up * heightDiff;
-    }
-
-    void GenerateBall()
-    {
-        Instantiate(golfBall, ballSpawnPosition, Quaternion.identity);
     }
 }

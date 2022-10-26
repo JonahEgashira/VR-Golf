@@ -8,21 +8,29 @@ public class putterController : MonoBehaviour
 {
 
     public GameObject putter;
-    public GameObject point1;
-    public GameObject point2;
-    private float thrust = 50f;
+    public GameObject golfBall;
+    private List<GameObject> balls;
+    private float thrust = 0.1f;
     private int queueLimit = 10;
     private Queue<Vector3> accQueue;
+    public Vector3 ballSpawnPosition = new Vector3(0.0f, 0.2f, 0.0f);
     
     // Start is called before the first frame update
     void Start()
     {
+        balls = new List<GameObject>();
+        GenerateBall();
         accQueue = new Queue<Vector3>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (OVRInput.GetDown(OVRInput.RawButton.B))
+        {
+            GenerateBall();
+        }
+
         var putterAcc = OVRInput.GetLocalControllerAcceleration(OVRInput.Controller.RTouch);
         if (accQueue.Count > queueLimit)
         {
@@ -35,34 +43,37 @@ public class putterController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Ball"))
         {
-            Debug.Log("Entered");
             moveBall(other);
         }
     }
 
     private Vector3 averageAcc()
     {
-        if (accQueue.Count == 0)
+        var count = accQueue.Count;
+        if (count == 0)
         {
             return new Vector3(0f, 0f, 0f);
         }
-        var count = accQueue.Count;
         var result = new Vector3();
         while (accQueue.Count != 0)
         {
             result += accQueue.Dequeue();
         }
-        return result / count;
+        return new Vector3(result.x / count, result.y / count, result.z / count);
     }
 
     private void moveBall(Collider other)
     {
         var ball_RigidBody = other.gameObject.GetComponent<Rigidbody>();
         var averageAcc = this.averageAcc();
-        averageAcc.y = 0;
-        var putterAcc = OVRInput.GetLocalControllerAcceleration(OVRInput.Controller.RTouch);
-        putterAcc.y = 0.0f;
-        ball_RigidBody.AddForce(averageAcc * thrust);
-        Debug.Log(averageAcc);
+        averageAcc.y = 0.0f; 
+        ball_RigidBody.AddForce(averageAcc * thrust, ForceMode.Impulse);
     }
+    
+    private void GenerateBall()
+    {
+        var newBall = Instantiate(golfBall, ballSpawnPosition, Quaternion.identity);
+        balls.Add(newBall);
+    }
+    
 }
