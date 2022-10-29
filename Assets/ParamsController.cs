@@ -10,26 +10,26 @@ public class ParamsController : MonoBehaviour
     public PhysicMaterial floorMaterial;
     public GameObject ball;
     private Rigidbody _ballRigidbody;
+    private Ball _ball;
     public TextMeshProUGUI dynamicFriction;
     public TextMeshProUGUI ballMass;
     public TextMeshProUGUI ballDrag;
     public TextMeshProUGUI ballAngularDrag;
+    public TextMeshProUGUI thrust;
     public TextMeshProUGUI arrowDynamicFriction;
     public TextMeshProUGUI arrowBallMass;
     public TextMeshProUGUI arrowBallDrag;
     public TextMeshProUGUI arrowBallAngularDrag;
+    public TextMeshProUGUI arrowThrust;
 
     private const float _deltaDF = 0.01f;
     private const float _deltaBM = 0.01f;
     private const float _deltaBD = 0.01f;
     private const float _deltaBAD = 0.01f;
-    private const int _paramNumber = 4;
+    private const float _deltaThrust = 0.01f;
+    private const int _paramNumber = 5;
     private int index;
     
-    // 1. floor dynamic friction
-    // 2. ball mass
-    // 3. ball drag
-    // 4. ball angular drag
     void Start()
     {
     }
@@ -37,6 +37,7 @@ public class ParamsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _ball = ball.GetComponent<Ball>();
         _ballRigidbody = ball.GetComponent<Rigidbody>();
         getStickInput();
         displayValue();
@@ -49,6 +50,7 @@ public class ParamsController : MonoBehaviour
         ballMass.text = _ballRigidbody.mass.ToString();
         ballDrag.text = _ballRigidbody.drag.ToString();
         ballAngularDrag.text = _ballRigidbody.angularDrag.ToString();
+        thrust.text = _ball.thrust.ToString();
     }
 
     void updateIndex()
@@ -70,20 +72,24 @@ public class ParamsController : MonoBehaviour
         arrowBallMass.text = "";
         arrowBallDrag.text = "";
         arrowBallAngularDrag.text = "";
+        arrowThrust.text = "";
 
         switch (index)
         {
             case 0:
-                arrowDynamicFriction.text = "<--";
+                arrowDynamicFriction.text = "<";
                 break;
             case 1:
-                arrowBallMass.text = "<--";
+                arrowBallMass.text = "<";
                 break;
             case 2:
-                arrowBallDrag.text = "<--";
+                arrowBallDrag.text = "<";
                 break;
             case 3:
-                arrowBallAngularDrag.text = "<--";
+                arrowBallAngularDrag.text = "<";
+                break;
+            case 4:
+                arrowThrust.text = "<";
                 break;
             default:
                 break;
@@ -119,6 +125,9 @@ public class ParamsController : MonoBehaviour
                 break;
             case 3:
                 _ballRigidbody.angularDrag += _deltaBAD * sign;
+                break;
+            case 4:
+                _ball.thrust += _deltaThrust * sign;
                 break;
         }
     }

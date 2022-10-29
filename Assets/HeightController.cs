@@ -9,10 +9,6 @@ public class HeightController : MonoBehaviour
     public GameObject putterBottom;
     public GameObject floorLevel;
     
-    void Start()
-    {
-    }
-
     // Update is called once per frame
     void Update()
     {
