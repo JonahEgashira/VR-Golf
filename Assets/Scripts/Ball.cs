@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using OVR;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
@@ -12,6 +13,7 @@ public class Ball : MonoBehaviour
     public GameObject ballController;
     private BallController _controller;
     private Rigidbody _rigidBody;
+    public AudioSource audioSource;
 
     private void Start()
     {
@@ -40,10 +42,11 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Putter") && !_isHit)
         {
+            audioSource.Play();
             _isHit = true;
             moveBall();
             VibrationExtension.Instance.
-                VibrateController(0.05f, 1, 0.2f, OVRInput.Controller.RTouch);
+                VibrateController(0.05f, 1, 0.5f, OVRInput.Controller.RTouch);
         }
     }
 
