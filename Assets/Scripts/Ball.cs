@@ -82,7 +82,7 @@ public class Ball : MonoBehaviour
         }
         
         // stopped
-        if (_rigidBody.velocity.magnitude < 0.02f)
+        if (_rigidBody.velocity.magnitude < 0.05f)
         {
             return true;
         }
