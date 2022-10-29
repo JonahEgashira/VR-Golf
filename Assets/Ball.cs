@@ -42,6 +42,8 @@ public class Ball : MonoBehaviour
         {
             _isHit = true;
             moveBall();
+            VibrationExtension.Instance.
+                VibrateController(0.05f, 1, 0.2f, OVRInput.Controller.RTouch);
         }
     }
 
@@ -71,7 +73,7 @@ public class Ball : MonoBehaviour
         var y = gameObject.transform.position.y;
         
         // out of area
-        if (Math.Abs(x) > 2.5f || Math.Abs(y) > 0.5f)
+        if (Math.Abs(x) > 3.0f || Math.Abs(y) > 0.5f)
         {
             return true;
         }

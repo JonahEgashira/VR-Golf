@@ -21,6 +21,12 @@ public class ParamsController : MonoBehaviour
     public TextMeshProUGUI arrowBallDrag;
     public TextMeshProUGUI arrowBallAngularDrag;
     public TextMeshProUGUI arrowThrust;
+    
+    private const float _df = 0.6f;
+    private const float _bm = 0.05f;
+    private const float _bd = 0.65f;
+    private const float _bad = 0.7f;
+    private const float _th = 0.12f;
 
     private const float _deltaDF = 0.01f;
     private const float _deltaBM = 0.01f;
@@ -32,13 +38,23 @@ public class ParamsController : MonoBehaviour
     
     void Start()
     {
+        _ball = ball.GetComponent<Ball>();
+        _ballRigidbody = ball.GetComponent<Rigidbody>();
+        initializeParams();
+    }
+
+    void initializeParams()
+    {
+        floorMaterial.dynamicFriction = _df;
+        _ballRigidbody.mass = _bm;
+        _ballRigidbody.drag = _bd;
+        _ballRigidbody.angularDrag = _bad;
+        _ball.thrust = _th;
     }
 
     // Update is called once per frame
     void Update()
     {
-        _ball = ball.GetComponent<Ball>();
-        _ballRigidbody = ball.GetComponent<Rigidbody>();
         getStickInput();
         displayValue();
         switchActiveParam();
