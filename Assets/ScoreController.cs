@@ -44,12 +44,12 @@ public class ScoreController : MonoBehaviour
         countText.text = count.ToString();
     }
 
-    public void pushData(float dist, float x, float y)
+    public void pushData(float dist, float x, float z)
     {
         var _dist = Math.Round((decimal)dist, 4).ToString();
         var _x = Math.Round((decimal)x, 4).ToString();
-        var _y = Math.Round((decimal)y, 4).ToString();
-        distance.Add(_dist + "," + _x + "," + _y);
+        var _z = Math.Round((decimal)z, 4).ToString();
+        distance.Add(_dist + "," + _x + "," + _z);
     }
     
     private void StoreResultInPC()

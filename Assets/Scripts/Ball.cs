@@ -46,10 +46,10 @@ public class Ball : MonoBehaviour
     private float calcScore(Vector3 ballPos)
     {
         const float targetX = -2.0f;
-        const float targetY = 0.0f;
+        const float targetZ= 0.0f;
         var dx = Math.Abs(ballPos.x - targetX);
-        var dy = Math.Abs(ballPos.y - targetY);
-        var dist = (float)Math.Sqrt(dx * dx + dy * dy);
+        var dz = Math.Abs(ballPos.z - targetZ);
+        var dist = (float)Math.Sqrt(dx * dx + dz * dz);
         return dist;
     }
 
