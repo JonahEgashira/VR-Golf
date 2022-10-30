@@ -1449,8 +1449,8 @@ extern void ScoreController_Awake_mDCF14D25ACEA0B60683E2F0F35FD7BBB68A4C30B (voi
 extern void ScoreController_Update_m174CEFD460EEF67207D0964905974F9468CD08A2 (void);
 // 0x000002D6 System.Void ScoreController::showScore()
 extern void ScoreController_showScore_mE464D28B92D4B63A47C995848CCF6AAD450654FB (void);
-// 0x000002D7 System.Void ScoreController::pushDistance(System.Single)
-extern void ScoreController_pushDistance_m704D701278BCA1039EBBEA26328F5CA9B6F9D3B8 (void);
+// 0x000002D7 System.Void ScoreController::pushData(System.Single,System.Single,System.Single)
+extern void ScoreController_pushData_mFBEBD4B12B8C6B563F81A4099263DA2B3B67C406 (void);
 // 0x000002D8 System.Void ScoreController::StoreResultInPC()
 extern void ScoreController_StoreResultInPC_mB7CC6FD2DC9E8C90043D0E26AC0779CD3C52F61F (void);
 // 0x000002D9 System.Void ScoreController::StoreResultInDevice()
@@ -3663,7 +3663,7 @@ static Il2CppMethodPointer s_methodPointers[1479] =
 	ScoreController_Awake_mDCF14D25ACEA0B60683E2F0F35FD7BBB68A4C30B,
 	ScoreController_Update_m174CEFD460EEF67207D0964905974F9468CD08A2,
 	ScoreController_showScore_mE464D28B92D4B63A47C995848CCF6AAD450654FB,
-	ScoreController_pushDistance_m704D701278BCA1039EBBEA26328F5CA9B6F9D3B8,
+	ScoreController_pushData_mFBEBD4B12B8C6B563F81A4099263DA2B3B67C406,
 	ScoreController_StoreResultInPC_mB7CC6FD2DC9E8C90043D0E26AC0779CD3C52F61F,
 	ScoreController_StoreResultInDevice_mE136E377FFA6EE7BF3150C0E9880840E9F43756F,
 	ScoreController__ctor_m161DBF9A2ED8098CD117A438518B3C716F0BC5F7,
@@ -5145,7 +5145,7 @@ static const int32_t s_InvokerIndices[1479] =
 	6039,
 	6039,
 	6039,
-	4955,
+	1651,
 	6039,
 	6039,
 	6039,

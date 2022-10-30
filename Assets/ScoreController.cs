@@ -47,8 +47,8 @@ public class ScoreController : MonoBehaviour
     public void pushData(float dist, float x, float y)
     {
         var _dist = Math.Round((decimal)dist, 4).ToString();
-        var _x = Math.Round((decimal)gameObject.transform.position.x, 4).ToString();
-        var _y = Math.Round((decimal)gameObject.transform.position.y, 4).ToString();
+        var _x = Math.Round((decimal)x, 4).ToString();
+        var _y = Math.Round((decimal)y, 4).ToString();
         distance.Add(_dist + "," + _x + "," + _y);
     }
     
