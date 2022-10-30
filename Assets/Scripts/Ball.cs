@@ -33,9 +33,24 @@ public class Ball : MonoBehaviour
 
         if (hasBallStopped())
         {
+            var dist = calcScore(gameObject.transform.position);
+            var x = gameObject.transform.position.x;
+            var y = gameObject.transform.position.y;
+            ScoreController.Instance.pushData(dist, x, y);
+            ScoreController.Instance.count++;
             Destroy(gameObject);
             _controller.GenerateBall();
         }
+    }
+
+    private float calcScore(Vector3 ballPos)
+    {
+        const float targetX = -2.0f;
+        const float targetY = 0.0f;
+        var dx = Math.Abs(ballPos.x - targetX);
+        var dy = Math.Abs(ballPos.y - targetY);
+        var dist = (float)Math.Sqrt(dx * dx + dy * dy);
+        return dist;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -86,7 +101,7 @@ public class Ball : MonoBehaviour
         {
             return true;
         }
-
+        
         return false;
     }
 
