@@ -7,7 +7,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private bool _isHit;
-    public float thrust = 0.1f;
+    public float thrust; // Set in ParamsController
     private int queueLimit = 10;
     private Queue<Vector3> accQueue;
     public GameObject ballController;
@@ -24,7 +24,7 @@ public class Ball : MonoBehaviour
 
     private void Update()
     {
-        var putterAcc = OVRInput.GetLocalControllerAcceleration(OVRInput.Controller.RTouch);
+        var putterAcc = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
         if (accQueue.Count > queueLimit)
         {
             accQueue.Dequeue();
@@ -109,6 +109,7 @@ public class Ball : MonoBehaviour
     {
         var averageAcc = this.averageAcc();
         averageAcc.y = 0.0f; 
+        Debug.Log(averageAcc);
         _rigidBody.AddForce(averageAcc * thrust, ForceMode.Impulse);
     }
 }

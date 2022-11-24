@@ -12,7 +12,8 @@ public class HeightController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.A))
+        if (OVRInput.GetDown(OVRInput.RawButton.A ) || 
+            OVRInput.GetDown(OVRInput.RawButton.RHandTrigger))
         {
             FixHeight();
         }
