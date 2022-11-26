@@ -71,3 +71,9 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+# BackUps
+/PassThrough_BackUpThisFolder_ButDontShipItWithYourGame
+/VR-Golf_BackUpThisFolder_ButDontShipItWithYourGame
+/Real_BackUpThisFolder_ButDontShipItWithYourGame
+/MixedReality_BackUpThisFolder_ButDontShipItWithYourGame

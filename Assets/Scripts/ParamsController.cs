@@ -22,11 +22,11 @@ public class ParamsController : MonoBehaviour
     public TextMeshProUGUI arrowBallAngularDrag;
     public TextMeshProUGUI arrowThrust;
     
-    private const float _df = 0.6f;
+    private const float _df = 0.65f;
     private const float _bm = 0.05f;
-    private const float _bd = 0.6f;
-    private const float _bad = 0.6f;
-    private const float _th = 0.3f;
+    private const float _bd = 0.68f;
+    private const float _bad = 0.68f;
+    private const float _th = 0.375f;
 
     private const float _deltaDF = 0.01f;
     private const float _deltaBM = 0.01f;
