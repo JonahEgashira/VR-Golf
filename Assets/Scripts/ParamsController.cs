@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class ParamsController : MonoBehaviour
@@ -11,29 +8,33 @@ public class ParamsController : MonoBehaviour
     public GameObject ball;
     private Rigidbody _ballRigidbody;
     private Ball _ball;
+    public TextMeshProUGUI staticFriction;
     public TextMeshProUGUI dynamicFriction;
     public TextMeshProUGUI ballMass;
     public TextMeshProUGUI ballDrag;
     public TextMeshProUGUI ballAngularDrag;
     public TextMeshProUGUI thrust;
+    public TextMeshProUGUI arrowStaticFriction;
     public TextMeshProUGUI arrowDynamicFriction;
     public TextMeshProUGUI arrowBallMass;
     public TextMeshProUGUI arrowBallDrag;
     public TextMeshProUGUI arrowBallAngularDrag;
     public TextMeshProUGUI arrowThrust;
-    
-    private const float _df = 0.65f;
-    private const float _bm = 0.05f;
-    private const float _bd = 0.68f;
-    private const float _bad = 0.68f;
-    private const float _th = 0.375f;
 
+    private const float _sf = 0.6f;
+    private const float _df = 0.5f;
+    private const float _bm = 0.046f;
+    private const float _bd = 0.6f;
+    private const float _bad = 0.6f;
+    private const float _th = 0.2f;
+
+    private const float _deltaSF = 0.01f;
     private const float _deltaDF = 0.01f;
-    private const float _deltaBM = 0.01f;
+    private const float _deltaBM = 0.001f;
     private const float _deltaBD = 0.01f;
     private const float _deltaBAD = 0.01f;
     private const float _deltaThrust = 0.01f;
-    private const int _paramNumber = 5;
+    private const int _paramNumber = 6;
     private int index;
     
     void Start()
@@ -45,6 +46,7 @@ public class ParamsController : MonoBehaviour
 
     void initializeParams()
     {
+        floorMaterial.staticFriction = _sf;
         floorMaterial.dynamicFriction = _df;
         _ballRigidbody.mass = _bm;
         _ballRigidbody.drag = _bd;
@@ -62,6 +64,7 @@ public class ParamsController : MonoBehaviour
 
     void displayValue()
     {
+        staticFriction.text = floorMaterial.staticFriction.ToString();
         dynamicFriction.text = floorMaterial.dynamicFriction.ToString();
         ballMass.text = _ballRigidbody.mass.ToString();
         ballDrag.text = _ballRigidbody.drag.ToString();
@@ -93,21 +96,22 @@ public class ParamsController : MonoBehaviour
         switch (index)
         {
             case 0:
-                arrowDynamicFriction.text = "<";
+                arrowStaticFriction.text = "<";
                 break;
             case 1:
-                arrowBallMass.text = "<";
+                arrowDynamicFriction.text = "<";
                 break;
             case 2:
-                arrowBallDrag.text = "<";
+                arrowBallMass.text = "<";
                 break;
             case 3:
-                arrowBallAngularDrag.text = "<";
+                arrowBallDrag.text = "<";
                 break;
             case 4:
-                arrowThrust.text = "<";
+                arrowBallAngularDrag.text = "<";
                 break;
-            default:
+            case 5:
+                arrowThrust.text = "<";
                 break;
         }
     }
@@ -131,18 +135,21 @@ public class ParamsController : MonoBehaviour
         switch (index)
         {
             case 0:
-                floorMaterial.dynamicFriction += _deltaDF * sign;
+                floorMaterial.staticFriction += _deltaSF * sign;
                 break;
             case 1:
-                _ballRigidbody.mass += _deltaBM * sign;
+                floorMaterial.dynamicFriction += _deltaDF * sign;
                 break;
             case 2:
-                _ballRigidbody.drag += _deltaBD * sign;
+                _ballRigidbody.mass += _deltaBM * sign;
                 break;
             case 3:
-                _ballRigidbody.angularDrag += _deltaBAD * sign;
+                _ballRigidbody.drag += _deltaBD * sign;
                 break;
             case 4:
+                _ballRigidbody.angularDrag += _deltaBAD * sign;
+                break;
+            case 5:
                 _ball.thrust += _deltaThrust * sign;
                 break;
         }
