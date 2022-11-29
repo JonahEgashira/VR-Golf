@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
     public float thrust; // Set in ParamsController
     private int queueLimit = 10;
     private Queue<Vector3> accQueue;
+    private Queue<Vector3> angularQueue;
     public GameObject ballController;
     private BallController _controller;
     private Rigidbody _rigidBody;
@@ -18,6 +19,7 @@ public class Ball : MonoBehaviour
     private void Start()
     {
         accQueue = new Queue<Vector3>();
+        angularQueue = new Queue<Vector3>();
         _rigidBody = gameObject.GetComponent<Rigidbody>();
         _controller = ballController.GetComponent<BallController>();
     }
@@ -25,11 +27,18 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         var putterAcc = OVRInput.GetLocalControllerVelocity(OVRInput.Controller.RTouch);
+        var angularAcc = OVRInput.GetLocalControllerAngularVelocity(OVRInput.Controller.RTouch);
         if (accQueue.Count > queueLimit)
         {
             accQueue.Dequeue();
         }
         accQueue.Enqueue(putterAcc);
+        
+        if (angularQueue.Count > queueLimit)
+        {
+            angularQueue.Dequeue();
+        }
+        angularQueue.Enqueue(angularAcc);
 
         if (hasBallStopped())
         {
@@ -63,6 +72,21 @@ public class Ball : MonoBehaviour
             VibrationExtension.Instance.
                 VibrateController(0.05f, 1, 0.5f, OVRInput.Controller.RTouch);
         }
+    }
+    
+    private Vector3 averageAngularAcc()
+    {
+        var count = angularQueue.Count;
+        if (count == 0)
+        {
+            return new Vector3(0f, 0f, 0f);
+        }
+        var result = new Vector3();
+        while (angularQueue.Count != 0)
+        {
+            result += angularQueue.Dequeue();
+        }
+        return new Vector3(result.x / count, result.y / count, result.z / count);
     }
 
     private Vector3 averageAcc()
@@ -108,8 +132,13 @@ public class Ball : MonoBehaviour
     private void moveBall()
     {
         var averageAcc = this.averageAcc();
-        averageAcc.y = 0.0f; 
-        Debug.Log(averageAcc);
-        _rigidBody.AddForce(averageAcc * thrust, ForceMode.Impulse);
+        var averageAngularAcc = this.averageAngularAcc();
+        averageAcc.y = 0.0f;
+        Debug.Log(averageAngularAcc);
+        averageAngularAcc.y = 0.0f;
+        averageAngularAcc.z = 0.0f;
+
+        var velocity = averageAcc + averageAngularAcc;
+        _rigidBody.AddForce(velocity * thrust, ForceMode.Impulse);
     }
 }

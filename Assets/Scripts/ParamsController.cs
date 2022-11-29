@@ -23,8 +23,8 @@ public class ParamsController : MonoBehaviour
 
     private const float _sf = 0.1f;
     private const float _df = 0.08f;
-    private const float _bm = 0.071f;
-    private const float _bd = 0.75f;
+    private const float _bm = 0.072f;
+    private const float _bd = 0.9f;
     private const float _bad = 0.1f;
     private const float _th = 0.3f;
 
