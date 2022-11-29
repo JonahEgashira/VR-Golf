@@ -87,6 +87,7 @@ public class ParamsController : MonoBehaviour
 
     void switchActiveParam()
     {
+        arrowStaticFriction.text = "";
         arrowDynamicFriction.text = "";
         arrowBallMass.text = "";
         arrowBallDrag.text = "";
