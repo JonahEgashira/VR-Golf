@@ -1,10 +1,14 @@
+using System;
 using TMPro;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ParamsController : MonoBehaviour
 {
     // Start is called before the first frame update
     public PhysicMaterial floorMaterial;
+    public GameObject modeController;
+    private ModeController _modeController;
     public GameObject ball;
     private Rigidbody _ballRigidbody;
     private Ball _ball;
@@ -28,6 +32,8 @@ public class ParamsController : MonoBehaviour
     private const float _bad = 0.1f;
     private const float _th = 0.3f;
 
+    public List<float> modifyBallMassList = new(); 
+
     private const float _deltaSF = 0.01f;
     private const float _deltaDF = 0.01f;
     private const float _deltaBM = 0.001f;
@@ -36,11 +42,14 @@ public class ParamsController : MonoBehaviour
     private const float _deltaThrust = 0.01f;
     private const int _paramNumber = 6;
     private int index;
-    
+
     void Start()
     {
         _ball = ball.GetComponent<Ball>();
         _ballRigidbody = ball.GetComponent<Rigidbody>();
+        // modifyBallMassList = new List<float>() { 0.056f, 0.064f, 0.080f, 0.088f };
+        modifyBallMassList = new List<float>() { 0.02f, 0.04f, 0.060f, 0.08f };
+        _modeController = modeController.GetComponent<ModeController>();
         initializeParams();
     }
 
@@ -54,9 +63,21 @@ public class ParamsController : MonoBehaviour
         _ball.thrust = _th;
     }
 
+    void updateModifiedParams()
+    {
+        var modifyIndex = _modeController.chooseModifyType();
+        if (modifyIndex == -1)
+        {
+            return;
+        }
+        var modifiedMass = modifyBallMassList[modifyIndex];
+        _ballRigidbody.mass = modifiedMass;
+    }
+    
     // Update is called once per frame
     void Update()
     {
+        updateModifiedParams();
         getStickInput();
         displayValue();
         switchActiveParam();

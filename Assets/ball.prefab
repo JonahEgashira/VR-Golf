@@ -130,6 +130,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrust: 0.3
   ballController: {fileID: 7126284522406477830, guid: 060a48aba269dd14c85249f8f3cb29d1, type: 3}
+  paramsController: {fileID: 9005433916345178438, guid: 7409c30a5c24a8e4f8c94c00d990e045, type: 3}
   audioSource: {fileID: -4406091118100662487}
 --- !u!82 &-4406091118100662487
 AudioSource:

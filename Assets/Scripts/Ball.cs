@@ -40,13 +40,13 @@ public class Ball : MonoBehaviour
         }
         angularQueue.Enqueue(angularAcc);
 
+        ballBrake();
         if (hasBallStopped())
         {
             var dist = calcScore(gameObject.transform.position);
             var x = gameObject.transform.position.x;
             var y = gameObject.transform.position.y;
             ScoreController.Instance.pushData(dist, x, y);
-            ScoreController.Instance.count++;
             Destroy(gameObject);
             _controller.GenerateBall();
         }
@@ -66,6 +66,7 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Putter") && !_isHit)
         {
+            ScoreController.Instance.count++;
             audioSource.Play();
             _isHit = true;
             moveBall();
@@ -102,6 +103,16 @@ public class Ball : MonoBehaviour
             result += accQueue.Dequeue();
         }
         return new Vector3(result.x / count, result.y / count, result.z / count);
+    }
+
+    private void ballBrake()
+    {
+        var velocity = _rigidBody.velocity.magnitude;
+        if (_isHit && velocity < 0.5f)
+        {
+            _rigidBody.drag = 1.0f;
+            _rigidBody.angularDrag = 1.0f;
+        }
     }
 
     private bool hasBallStopped()
