@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
     // Start is called before the first frame update
+    private bool hasGenerated;
     public GameObject ball;
     private List<GameObject> _balls;
     private readonly Vector3 _spawnPos = new(0.0f, 0.2f, 0.0f);
@@ -17,9 +18,10 @@ public class BallController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.B))
+        if (OVRInput.GetDown(OVRInput.RawButton.B) && !hasGenerated)
         {
             GenerateBall();
+            hasGenerated = true;
         }
     }
 
