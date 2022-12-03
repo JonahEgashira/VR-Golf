@@ -7,8 +7,8 @@ PhysicMaterial:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Floor
-  dynamicFriction: 0.65
-  staticFriction: 0.7
+  dynamicFriction: 0.08
+  staticFriction: 0.1
   bounciness: 0.1
   frictionCombine: 1
   bounceCombine: 0

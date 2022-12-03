@@ -138,7 +138,8 @@ public class Ball : MonoBehaviour
         averageAngularAcc.y = 0.0f;
         averageAngularAcc.z = 0.0f;
 
-        var velocity = averageAcc + averageAngularAcc;
+        var totalVelocity = averageAcc + averageAngularAcc;
+        var velocity = new Vector3(totalVelocity.x, totalVelocity.y, totalVelocity.z / 3.0f);
         _rigidBody.AddForce(velocity * thrust, ForceMode.Impulse);
     }
 }
