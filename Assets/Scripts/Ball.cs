@@ -45,8 +45,8 @@ public class Ball : MonoBehaviour
         {
             var dist = calcScore(gameObject.transform.position);
             var x = gameObject.transform.position.x;
-            var y = gameObject.transform.position.y;
-            ScoreController.Instance.pushData(dist, x, y);
+            var z = gameObject.transform.position.z;
+            ScoreController.Instance.pushData(dist, x, z);
             Destroy(gameObject);
             _controller.GenerateBall();
         }
