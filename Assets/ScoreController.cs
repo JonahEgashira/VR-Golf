@@ -30,7 +30,7 @@ public class ScoreController : MonoBehaviour
 
     private void Update()
     {
-        if (OVRInput.GetDown(OVRInput.RawButton.RIndexTrigger))
+        if (OVRInput.GetDown(OVRInput.RawButton.LIndexTrigger))
         {
             StoreResultInDevice();
             // StoreResultInPC();
