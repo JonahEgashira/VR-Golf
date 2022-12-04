@@ -108,8 +108,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789093559065116584}
   serializedVersion: 2
-  m_Mass: 0.072
-  m_Drag: 0.9
+  m_Mass: 0.045
+  m_Drag: 0.5
   m_AngularDrag: 0.1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -128,9 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c1a230edd26a641a081b278f563897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thrust: 0.3
+  thrust: 0.15
   ballController: {fileID: 7126284522406477830, guid: 060a48aba269dd14c85249f8f3cb29d1, type: 3}
-  paramsController: {fileID: 9005433916345178438, guid: 7409c30a5c24a8e4f8c94c00d990e045, type: 3}
   audioSource: {fileID: -4406091118100662487}
 --- !u!82 &-4406091118100662487
 AudioSource:

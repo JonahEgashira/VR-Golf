@@ -27,10 +27,10 @@ public class ParamsController : MonoBehaviour
 
     private const float _sf = 0.1f;
     private const float _df = 0.08f;
-    private const float _bm = 0.072f;
-    private const float _bd = 0.9f;
+    private const float _bm = 0.045f;
+    private const float _bd = 0.5f;
     private const float _bad = 0.1f;
-    private const float _th = 0.3f;
+    private const float _th = 0.15f;
 
     public List<float> modifyBallMassList = new(); 
 

@@ -107,12 +107,29 @@ public class Ball : MonoBehaviour
 
     private void ballBrake()
     {
+        // if (_rigidBody.drag >= 0.8f)
+        // {
+        //     gameObject.GetComponent<Renderer>().material.color = Color.green;
+        // }
         var velocity = _rigidBody.velocity.magnitude;
-        if (_isHit && velocity < 0.5f)
+        if (!_isHit)
         {
-            _rigidBody.drag = 1.0f;
-            _rigidBody.angularDrag = 1.0f;
+            return;
         }
+
+        if (velocity < 0.5f)
+        {
+            // gameObject.GetComponent<Renderer>().material.color = Color.blue;
+            _rigidBody.drag = 0.8f;
+            _rigidBody.angularDrag = 0.8f;
+        }
+        if (velocity < 0.2f)
+        {
+            // gameObject.GetComponent<Renderer>().material.color = Color.red;
+            _rigidBody.drag = 1.5f;
+            _rigidBody.angularDrag = 1.5f;
+        }
+
     }
 
     private bool hasBallStopped()
